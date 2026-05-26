@@ -45,7 +45,13 @@ async function fetchAllPages() {
 }
 
 async function main() {
-  if (!fs.existsSync(POSTS_DIR)) {
+  if (fs.existsSync(POSTS_DIR)) {
+    for (const file of fs.readdirSync(POSTS_DIR)) {
+      if (file !== '.gitkeep') {
+        fs.unlinkSync(path.join(POSTS_DIR, file));
+      }
+    }
+  } else {
     fs.mkdirSync(POSTS_DIR, { recursive: true });
   }
 
