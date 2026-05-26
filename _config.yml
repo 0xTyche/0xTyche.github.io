@@ -1,0 +1,26 @@
+title: 0xTyche
+description: Daily learning notes and personal blog.
+author: 0xTyche
+github_username: 0xTyche
+url: "https://0xTyche.github.io"
+baseurl: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+permalink: /notes/:year/:month/:day/:title/
+
+exclude:
+  - scripts/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - Gemfile
+  - Gemfile.lock
+  - README.md

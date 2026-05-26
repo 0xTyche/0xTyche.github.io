@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<article class="post">
+  <a href="{{ '/' | relative_url }}" class="back-link">← Back</a>
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <time>{{ page.date | date: "%Y-%m-%d" }}</time>
+      {% if page.classification and page.classification != "" %}
+      <span class="tag">{{ page.classification }}</span>
+      {% endif %}
+      {% if page.priority and page.priority != "" %}
+      <span class="tag">{{ page.priority }}</span>
+      {% endif %}
+      {% if page.status and page.status != "" %}
+      <span class="tag">{{ page.status }}</span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-content">
+    {% if content == "" or content == "<p></p>" %}
+    <p class="empty-state">No content for this note.</p>
+    {% else %}
+    {{ content }}
+    {% endif %}
+  </div>
+</article>

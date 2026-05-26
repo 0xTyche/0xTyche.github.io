@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<header class="site-header">
+  <h1 class="site-title">{{ site.title }}</h1>
+  <p class="site-description">{{ site.description }}</p>
+  <nav class="social-links">
+    <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub →</a>
+  </nav>
+</header>
+
+<main>
+  <section class="posts-section">
+    <h2 class="section-title">Notes</h2>
+
+    {% if site.posts.size == 0 %}
+    <p class="empty-state">No notes yet. Check back soon.</p>
+    {% else %}
+    <div class="posts-list">
+      {% for post in site.posts %}
+      <a href="{{ post.url | relative_url }}" class="post-item">
+        <time class="post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+        <span class="post-title">{{ post.title }}</span>
+        {% if post.classification and post.classification != "" %}
+        <span class="post-tag">{{ post.classification }}</span>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+</main>
