@@ -94,6 +94,26 @@ body {
   color: var(--bg);
 }
 
+/* ── Search ── */
+.search-wrap {
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search-input::placeholder { color: var(--muted); }
+.search-input:focus { border-color: #aaa; }
+
 /* ── Post list ── */
 .posts-list {
   display: flex;

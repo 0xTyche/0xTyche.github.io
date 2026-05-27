@@ -35,6 +35,11 @@ layout: default
     </div>
     {% endif %}
 
+    <div class="search-wrap">
+      <input type="text" id="search-input" class="search-input" placeholder="Search notes…" autocomplete="off">
+    </div>
+    <p id="search-empty" class="empty-state" style="display:none;">No results found.</p>
+
     <div class="posts-list">
       {% for post in site.posts %}
       <a href="{{ post.url | relative_url }}" class="post-item" data-classification="{{ post.classification }}">
@@ -49,19 +54,37 @@ layout: default
 
     <script>
       (function () {
-        var btns = document.querySelectorAll('.filter-btn');
-        var posts = document.querySelectorAll('.post-item');
+        var btns   = document.querySelectorAll('.filter-btn');
+        var posts  = document.querySelectorAll('.post-item');
+        var input  = document.getElementById('search-input');
+        var empty  = document.getElementById('search-empty');
+        var activeFilter = 'all';
+
+        function applyFilters() {
+          var query = input.value.trim().toLowerCase();
+          var visible = 0;
+          posts.forEach(function (post) {
+            var cls   = post.dataset.classification || '';
+            var title = post.querySelector('.post-title').textContent.toLowerCase();
+            var matchFilter = (activeFilter === 'all' || cls === activeFilter);
+            var matchSearch = (query === '' || title.includes(query));
+            var show = matchFilter && matchSearch;
+            post.style.display = show ? '' : 'none';
+            if (show) visible++;
+          });
+          empty.style.display = (visible === 0) ? '' : 'none';
+        }
+
         btns.forEach(function (btn) {
           btn.addEventListener('click', function () {
             btns.forEach(function (b) { b.classList.remove('active'); });
             btn.classList.add('active');
-            var filter = btn.dataset.filter;
-            posts.forEach(function (post) {
-              var cls = post.dataset.classification || '';
-              post.style.display = (filter === 'all' || cls === filter) ? '' : 'none';
-            });
+            activeFilter = btn.dataset.filter;
+            applyFilters();
           });
         });
+
+        input.addEventListener('input', applyFilters);
       })();
     </script>
 
