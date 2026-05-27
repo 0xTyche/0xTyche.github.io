@@ -17,9 +17,27 @@ layout: default
     {% if site.posts.size == 0 %}
     <p class="empty-state">No notes yet. Check back soon.</p>
     {% else %}
+
+    {% assign classifications = site.posts | map: "classification" | compact | uniq | sort %}
+    {% assign has_classifications = false %}
+    {% for c in classifications %}
+      {% if c != "" %}{% assign has_classifications = true %}{% endif %}
+    {% endfor %}
+
+    {% if has_classifications %}
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      {% for c in classifications %}
+        {% if c != "" %}
+      <button class="filter-btn" data-filter="{{ c }}">{{ c }}</button>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="posts-list">
       {% for post in site.posts %}
-      <a href="{{ post.url | relative_url }}" class="post-item">
+      <a href="{{ post.url | relative_url }}" class="post-item" data-classification="{{ post.classification }}">
         <time class="post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
         <span class="post-title">{{ post.title }}</span>
         {% if post.classification and post.classification != "" %}
@@ -28,6 +46,25 @@ layout: default
       </a>
       {% endfor %}
     </div>
+
+    <script>
+      (function () {
+        var btns = document.querySelectorAll('.filter-btn');
+        var posts = document.querySelectorAll('.post-item');
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            btns.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var filter = btn.dataset.filter;
+            posts.forEach(function (post) {
+              var cls = post.dataset.classification || '';
+              post.style.display = (filter === 'all' || cls === filter) ? '' : 'none';
+            });
+          });
+        });
+      })();
+    </script>
+
     {% endif %}
   </section>
 </main>
