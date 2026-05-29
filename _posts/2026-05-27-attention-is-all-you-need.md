@@ -15,3 +15,5 @@ notion_id: "36d37231-b8a5-805c-8cbd-d4fc3995a8e4"
 大概 n 年前就阅读学习了这篇文章，当时还阅读了李沐老师的解读视频（https://www.bilibili.com/video/BV1pu411o7BE），多年过去已经有所遗忘了，所以特意再次学习复习。
 
 - Transformer 最开始是提出在翻译任务上面。
+
+早先简单的RNN架构分为两个部分一个是Encoder、另一个是Decoder，而两个部分是通过$a^{<T_x>}$来传递信息的
