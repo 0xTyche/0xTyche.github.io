@@ -9,6 +9,38 @@ notion_id: "3c237231-b8a5-8000-b852-d422c2258ea7"
 ---
 
 
+## 00 - Warmup
+
+
+问题：该问题是为了确认答题者的环境配置（RPC）等设置是否正确。
+
+
+该测试会在区块高度 21895252 处分叉以太坊主网，并向你的地址发放 10 个 ETH。请编写代码，`test_Solution()`确保你的地址至少持有 1 个 WETH。
+
+
+请用以下方式核实：
+
+
+```plain text
+python alpha.py check 00
+```
+
+
+解题思路：
+该题仅为测试答题环境是否正确，所以取一个 eth 即可。
+
+
+```solidity
+function test_Solution() public {
+        vm.startBroadcast(user);
+        // Your solution goes here.
+        IWETH(WETH).deposit{value: 1 ether}();
+        vm.stopBroadcast();
+        checkSolve();
+    }
+```
+
+
 ## **01 - Out of Nowhere**
 
 
@@ -23,7 +55,7 @@ https://etherscan.io/tx/0xe7b8d46c3f3e5f727cb42c9dfe7fc36855ab5092cf160e4c8812a2
 2. 首先打开 etherscan发现是 跨链桥 Allbridge: Bridge
 3. 但不够清晰，到 arkm 上检查 2026年01月28日 17:56:59 这个哈希，实际就是由 Allbridge: Bridge 跨链桥跨到了 0xEc5f2EFa1A13c81179dDb0f0d4385e99E275994b 这个地址（这个地址就是题目所说的流动性提供方）
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d1c875c3-bb05-46e0-8238-b11345dae992/e49228e0-d238-4e0e-abb6-320755247e19/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QICALQBR%2F20260824%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260824T030502Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBkaCXVzLXdlc3QtMiJIMEYCIQCZhXZ2%2BDE7NlQKFhxgm56CDBGC3EAkE%2Fy7usg168zEUgIhAPRX04AmlCs5C0UB8hVI%2FtJyVI4zXv%2F908Nq0b%2FFc3O1KogECOL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1Igxo18CUXjCZk9fTAk0q3AM7K%2FJMT7H61EU8muM2sF%2ByHXyrQUyBKrEtBB3wQHPl2QloIcm9PpMfI3OEe30D7MTUIpoXlFHteiCm6%2BKxgTWM%2FoceDW5M2ivpobRHUG%2FRJdc8NZaRys0kMIy3Ieo%2BSz%2FRg8FFs5551Fg4%2BiXt0mvbRfDRSsmB%2Bdc6bIVDGFNUqzRb3%2F0Bc2HmMCks9fT9AfwgDPLXMmGEAGqWbH151UepQ9DoiVhTAYfIRKZBaTR6uAg%2B4FPql7TUlLk8fo1HiYpRUBwyYBSMcwUDz31JX0LoUyRJFqj4qt%2FqyxO1X8racjnI6Uve55ylkmnZdRWIIr1fmYJVrCRM8iRguTrZxLX7U6wdF2Jvs7MbfH7Ln%2Bx6HJRUOZLnx7T%2BF3F2m6Mq3Yg6vO4KyPK1RaYv1KiDggZAeU1ejGNx4744B0JZPoA%2B3CG9Gytu4f%2BfvHqnqdqVwR%2FOpXQ4XaEmx%2BqmPmr6V5wEUG3LXqswWKPNruz%2BUMyHF2dBtWPsjsIctDSjTAMBnUuorbS0NMdSD4KxNd3fTXc9D9Fi1TuAP16PDGFuib%2Fyjb1dVkAoJCclqzkmy%2BfmSf9Y%2FWPR8ou%2Fc0Z%2Bl3eEMDxsujM0zaEoiI4gXv8rve%2BkHw%2F67xeOWsSosTRpajCIt67UBjqkAU16tXHP1dO%2BboWFsHf8fsb71ZzKTx2QR0CnozcOMOV9aw32RyM0ekHd1UNYbQbylMt6SWRhF2o5B6qhj0ae4iGOvRpuYGKNpRy%2Bn%2BJHdz6mJB%2FJmbtGn87Ig5Hyx%2Bp9e7q%2FeiQCSPBoJwsXV%2B3ZHSg2h2lUgFsoPiNlYT%2BHywvX1iWAwGcn2Uzh0wO4TGycFDNVwGS9hrfMXPTGcc2e79QJqLXG&X-Amz-Signature=0f6d0e28027a0989be67e43d110e87a19e8022435f8701c2a982480a4d1d8837&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d1c875c3-bb05-46e0-8238-b11345dae992/e49228e0-d238-4e0e-abb6-320755247e19/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665S7PN3CH%2F20260825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260825T030026Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDEaCXVzLXdlc3QtMiJGMEQCIF2yWESTftZ6elhNuQpn6uGeBIvXJ29RETqicPzaomdSAiAOhFzXNMdY5vMJ5D1bvtsowNNgqLrk7YvTcBGCc7%2FOuiqIBAj6%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMQVauTEEx5E05OZlGKtwDs51Mc8JbXVl%2B5fcaM26L0zwkdxV48ie2KeCzYJ3bNWeQVpBfBzuMCe0GzuvAwLXs4Of4qQ1%2Bn2iylNEyEwdSh%2FBTA7v2fGrPmdbOEIn%2FkDZkjEJrUVJef8A3dhPJaJAkJ6QVbt6u66HckH4Gti6iWlu792HgWeGxqTkfbuGQ%2FezDvurpdCxLnANiH2nV%2BIzk8iOMHSrXL0Wtg2F1CPwQjI91GFboEqfF7J6OBLkks8l6MmUNYbxBJdsgLM4HIF%2FllxUAi67qmObeRHQ1o9UdS%2FE4lk9MUnptTP8MzCfn94GbDHvlTsHT6LMOX1EpxkLX%2FjGXBsof8aR5WLuaQD1JSWxtJ5L1eNlfz1qD%2FFq3S8g97sqFKuLBRZkV4ikwGSQg4V%2BH4ZS%2BxN5Nyh330b%2BI1BIgcRU5EnaR1T1flze4RKJaUFailVEPKB0mwaL0za38m4OjHznquJaXb%2F2f4psOEy%2BTcV0mPl%2FJfyV0aePoQDyqfN95B341QSGV7HrAT3CQ%2Fyvi1c%2FQH%2BZhxGMCD%2BSnMLfwgvtiR4QO7hELGfltoG9dFpe4PbQzS1AGjtnTl6eyILnbMSI45cCm09ZM8A%2F9HF2o%2BF1qDEHOjYcuHyDXrCj9xZhAkMzYzm3axFwwzNSz1AY6pgF65HOVBmfXVnaYkLz9kt0EKfo7DQC%2BK7w2jaPu1XvVt%2FPe7HQ0UR3%2FvBnW%2BqhFhoYQ9ZWsPikEQ6EWVdhq9IwH9go%2BChOFRQ66VKU4XUeeyAwYUmpWrajYkZYn8vG3ihkmdJyCU8olqVAetXPjtIIa%2Bi8FtlTCZd5lL7qUnZ1Fri4las2o5iU%2FUmLb28PdVEDJ6RjQTOwtP8kzgrWQ28Uente9sgAR&X-Amz-Signature=6afff0a090df878716db4862c21c4d4eea4d90856118f7948ea656e6a0a8c9c7&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 1. 所以我接下来去找去跨链浏览器 [https://next.allbridge.io/explorer?page=1](https://next.allbridge.io/explorer?page=1)
 2. 结果在浏览器中搜索目的地址没有找到，可能该浏览器能够查询的时间范围是有限的或者是该兑换路径被下架了，也有可能是
@@ -45,7 +77,7 @@ lock—id:0x000000000000000000000000000000000159fa4cd496a40b6531521bb9138a06
 以下是我查询 claude 给出的原因：【该条不完全正确，见补充1】
 
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d1c875c3-bb05-46e0-8238-b11345dae992/63e7a1ed-1d8e-42ac-ac51-8de7c74ef3d5/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466QICALQBR%2F20260824%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260824T030502Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBkaCXVzLXdlc3QtMiJIMEYCIQCZhXZ2%2BDE7NlQKFhxgm56CDBGC3EAkE%2Fy7usg168zEUgIhAPRX04AmlCs5C0UB8hVI%2FtJyVI4zXv%2F908Nq0b%2FFc3O1KogECOL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1Igxo18CUXjCZk9fTAk0q3AM7K%2FJMT7H61EU8muM2sF%2ByHXyrQUyBKrEtBB3wQHPl2QloIcm9PpMfI3OEe30D7MTUIpoXlFHteiCm6%2BKxgTWM%2FoceDW5M2ivpobRHUG%2FRJdc8NZaRys0kMIy3Ieo%2BSz%2FRg8FFs5551Fg4%2BiXt0mvbRfDRSsmB%2Bdc6bIVDGFNUqzRb3%2F0Bc2HmMCks9fT9AfwgDPLXMmGEAGqWbH151UepQ9DoiVhTAYfIRKZBaTR6uAg%2B4FPql7TUlLk8fo1HiYpRUBwyYBSMcwUDz31JX0LoUyRJFqj4qt%2FqyxO1X8racjnI6Uve55ylkmnZdRWIIr1fmYJVrCRM8iRguTrZxLX7U6wdF2Jvs7MbfH7Ln%2Bx6HJRUOZLnx7T%2BF3F2m6Mq3Yg6vO4KyPK1RaYv1KiDggZAeU1ejGNx4744B0JZPoA%2B3CG9Gytu4f%2BfvHqnqdqVwR%2FOpXQ4XaEmx%2BqmPmr6V5wEUG3LXqswWKPNruz%2BUMyHF2dBtWPsjsIctDSjTAMBnUuorbS0NMdSD4KxNd3fTXc9D9Fi1TuAP16PDGFuib%2Fyjb1dVkAoJCclqzkmy%2BfmSf9Y%2FWPR8ou%2Fc0Z%2Bl3eEMDxsujM0zaEoiI4gXv8rve%2BkHw%2F67xeOWsSosTRpajCIt67UBjqkAU16tXHP1dO%2BboWFsHf8fsb71ZzKTx2QR0CnozcOMOV9aw32RyM0ekHd1UNYbQbylMt6SWRhF2o5B6qhj0ae4iGOvRpuYGKNpRy%2Bn%2BJHdz6mJB%2FJmbtGn87Ig5Hyx%2Bp9e7q%2FeiQCSPBoJwsXV%2B3ZHSg2h2lUgFsoPiNlYT%2BHywvX1iWAwGcn2Uzh0wO4TGycFDNVwGS9hrfMXPTGcc2e79QJqLXG&X-Amz-Signature=839bcaa1b06223687f51b976396ce82862933f550fc90277ce7a6e9aafd4d354&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d1c875c3-bb05-46e0-8238-b11345dae992/63e7a1ed-1d8e-42ac-ac51-8de7c74ef3d5/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4665S7PN3CH%2F20260825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260825T030026Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDEaCXVzLXdlc3QtMiJGMEQCIF2yWESTftZ6elhNuQpn6uGeBIvXJ29RETqicPzaomdSAiAOhFzXNMdY5vMJ5D1bvtsowNNgqLrk7YvTcBGCc7%2FOuiqIBAj6%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIMQVauTEEx5E05OZlGKtwDs51Mc8JbXVl%2B5fcaM26L0zwkdxV48ie2KeCzYJ3bNWeQVpBfBzuMCe0GzuvAwLXs4Of4qQ1%2Bn2iylNEyEwdSh%2FBTA7v2fGrPmdbOEIn%2FkDZkjEJrUVJef8A3dhPJaJAkJ6QVbt6u66HckH4Gti6iWlu792HgWeGxqTkfbuGQ%2FezDvurpdCxLnANiH2nV%2BIzk8iOMHSrXL0Wtg2F1CPwQjI91GFboEqfF7J6OBLkks8l6MmUNYbxBJdsgLM4HIF%2FllxUAi67qmObeRHQ1o9UdS%2FE4lk9MUnptTP8MzCfn94GbDHvlTsHT6LMOX1EpxkLX%2FjGXBsof8aR5WLuaQD1JSWxtJ5L1eNlfz1qD%2FFq3S8g97sqFKuLBRZkV4ikwGSQg4V%2BH4ZS%2BxN5Nyh330b%2BI1BIgcRU5EnaR1T1flze4RKJaUFailVEPKB0mwaL0za38m4OjHznquJaXb%2F2f4psOEy%2BTcV0mPl%2FJfyV0aePoQDyqfN95B341QSGV7HrAT3CQ%2Fyvi1c%2FQH%2BZhxGMCD%2BSnMLfwgvtiR4QO7hELGfltoG9dFpe4PbQzS1AGjtnTl6eyILnbMSI45cCm09ZM8A%2F9HF2o%2BF1qDEHOjYcuHyDXrCj9xZhAkMzYzm3axFwwzNSz1AY6pgF65HOVBmfXVnaYkLz9kt0EKfo7DQC%2BK7w2jaPu1XvVt%2FPe7HQ0UR3%2FvBnW%2BqhFhoYQ9ZWsPikEQ6EWVdhq9IwH9go%2BChOFRQ66VKU4XUeeyAwYUmpWrajYkZYn8vG3ihkmdJyCU8olqVAetXPjtIIa%2Bi8FtlTCZd5lL7qUnZ1Fri4las2o5iU%2FUmLb28PdVEDJ6RjQTOwtP8kzgrWQ28Uente9sgAR&X-Amz-Signature=3eb71955438b9e1fc7ea13790a61f1a8e1a56e4699053c67a35e32ded8a53fc2&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject)
 
 1. 那就考虑去 stacks 那一端的跨链桥去找 跨链桥合约，然后找时间戳附近的跨链交易，1.5M usd的金额+时间戳应该是比较容易找到的
 2. 搜索路径：
